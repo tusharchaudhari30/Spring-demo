@@ -2,7 +2,6 @@ package com.studentcertificate.service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +12,12 @@ import com.studentcertificate.model.Certificate;
 
 @Service
 public class CertificateServiceImpl implements CertificateService{
-	@Autowired
-	private CertificateDAO certificateDAO;
+private CertificateDAO certificateDAO;
+	
+	public void setCertificateDAO(CertificateDAO certificateDAO)
+	{
+		this.certificateDAO=certificateDAO;
+	}
 
 	@Override
 	@Transactional
@@ -46,6 +49,7 @@ public class CertificateServiceImpl implements CertificateService{
 	@Override
 	@Transactional
 	public Long getBonafidecount() {
+		// TODO Auto-generated method stub
 		return this.certificateDAO.getBonafidecount();
 	}
 	

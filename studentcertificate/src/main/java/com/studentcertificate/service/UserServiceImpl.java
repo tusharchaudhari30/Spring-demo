@@ -4,19 +4,19 @@ package com.studentcertificate.service;
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.studentcertificate.dao.UserDAO;
 import com.studentcertificate.model.USER;
-
-
 @Service
 public class UserServiceImpl implements UserService
 {
-	@Autowired
 	private UserDAO userDAO;
+
+	public void setUserDAO(UserDAO userDAO) {
+		this.userDAO = userDAO;
+	}
 
 	@Override
 	@Transactional
@@ -35,6 +35,8 @@ public class UserServiceImpl implements UserService
 	@Override
 	@Transactional
 	public List<USER> listUser() {
+		
+		// TODO Auto-generated method stub
 		return this.userDAO.listUser();
 	}
 

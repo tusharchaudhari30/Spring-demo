@@ -2,6 +2,14 @@ package com.studentcertificate.studentcertificate;
 
 import java.util.Properties;
 import javax.sql.DataSource;
+
+import com.studentcertificate.service.CertificateService;
+import com.studentcertificate.service.CertificateServiceImpl;
+import com.studentcertificate.service.StudentService;
+import com.studentcertificate.service.StudentServiceImpl;
+import com.studentcertificate.service.UserService;
+import com.studentcertificate.service.UserServiceImpl;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +35,8 @@ public class DBConfiguration {
     private String HBM2DDL_AUTO;
     @Value("${entitymanager.packagesToScan}")
     private String PACKAGES_TO_SCAN;
+    @Value("${hibernate.enable_lazy_load_no_trans}")
+    private String enable_lazy_load_no_trans;
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -45,6 +55,7 @@ public class DBConfiguration {
         hibernateProperties.put("hibernate.dialect", DIALECT);
         hibernateProperties.put("hibernate.show_sql", SHOW_SQL);
         hibernateProperties.put("hibernate.hbm2ddl.auto", HBM2DDL_AUTO);
+        // hibernateProperties.put("hibernate.enable_lazy_load_no_trans",enable_lazy_load_no_trans);
         sessionFactory.setHibernateProperties(hibernateProperties);
         return sessionFactory;
     }
@@ -54,4 +65,17 @@ public class DBConfiguration {
         transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;
     }
+    @Bean
+    public UserService userService() {
+        return new UserServiceImpl();
+    }
+    @Bean
+    public CertificateService certificateService(){
+        return new CertificateServiceImpl();
+    }
+    @Bean
+    public StudentService studentService(){
+        return new StudentServiceImpl();
+    }
+
 }

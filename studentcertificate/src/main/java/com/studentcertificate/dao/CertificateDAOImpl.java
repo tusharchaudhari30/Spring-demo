@@ -3,22 +3,18 @@ package com.studentcertificate.dao;
 
 import java.util.List;
 
-
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.studentcertificate.model.Certificate;
 
-@Repository
-@Transactional
 public class CertificateDAOImpl  implements CertificateDAO
 {
-	@Autowired
 	private SessionFactory sessionFactory;
+	
+	public void setSessionFactory(SessionFactory sf){
+		this.sessionFactory = sf;
+	}
 
 	@Override
 	public void addCertificate(Certificate u) {
